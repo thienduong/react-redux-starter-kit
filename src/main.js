@@ -2,10 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import './styles/main.scss'
+import createAxiosInterceptor from './store/AxiosInterceptor'
 
 // Store Initialization
 // ------------------------------------
 const store = createStore(window.__INITIAL_STATE__)
+//get data(userdata, pageinfo) from localstorage when refresh page
+store.dispatch({ type: 'INIT' });
+createAxiosInterceptor(store);
 
 // Render Setup
 // ------------------------------------

@@ -11,6 +11,11 @@ const __DEV__ = project.env === 'development'
 const __TEST__ = project.env === 'test'
 const __PROD__ = project.env === 'production'
 
+var lib_dir = path.join(__dirname, '..', 'public/libraries'),
+  node_dir = path.join(__dirname, '..', 'node_modules'),
+  bower_dir = path.join(__dirname, '..', 'bower_components'),
+  plugins_dir = path.join(__dirname, '..', 'public/plugins')
+
 const config = {
   entry: {
     normalize: [
@@ -27,6 +32,20 @@ const config = {
     publicPath: project.publicPath,
   },
   resolve: {
+    alias: {
+      jquery: node_dir + '/jquery/dist/jquery.min.js',
+      velocity: node_dir + '/velocity-animate',
+      jqueryUi: plugins_dir + '/jQueryUI/jquery-ui.min.js',
+      bootstrap: plugins_dir + '/bootstrap/js/bootstrap.min.js',
+      raphael: node_dir + '/raphael/raphael.js',
+      morris: plugins_dir + '/morris/morris.js',
+      jvectormap: plugins_dir + '/jvectormap/jquery-jvectormap-1.2.2.min.js',
+      jvectormapWorld: plugins_dir + '/jvectormap/jquery-jvectormap-world-mill-en.js',
+      moment: plugins_dir + '/moment/moment.js',
+      bootstrapDatepicker: plugins_dir + '/datepicker/bootstrap-datepicker.js',
+      slimscroll: plugins_dir + '/slimScroll/jquery.slimscroll.min.js',
+      fastclick: plugins_dir + '/fastclick/fastclick.min.js'
+    },
     modules: [
       inProject(project.srcDir),
       'node_modules',
@@ -178,6 +197,13 @@ config.plugins.push(new HtmlWebpackPlugin({
   minify: {
     collapseWhitespace: true,
   },
+}))
+
+config.plugins.push(new webpack.ProvidePlugin({
+  '$': 'jquery',
+  'window.jQuery': 'jquery',
+  'jQuery': 'jquery',
+  'window.$': 'jquery',
 }))
 
 // Development Tools
