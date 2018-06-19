@@ -4,6 +4,7 @@ import CommonLayout from '../layouts/CommonLayout/CommonLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
 import ProductRoute from './Product'
+import CategoryRoute from './Category'
 import SignInRoute from './SignIn'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -13,13 +14,13 @@ export const createRoutes = (store) => {
   const authenticate = (nextState, transition) => {
     // if router not home "/" check authenticate
     if (nextState.location.pathname !== '/') {
-      let {app} = store.getState();
+      let { app } = store.getState()
       if (!app || !app.acceptToken) {
-        transition('/signin');
+        transition('/signin')
       }
     }
   }
-  
+
   return [
     {
       path: '/',
@@ -28,7 +29,8 @@ export const createRoutes = (store) => {
       indexRoute: Home,
       childRoutes: [
         CounterRoute(store),
-        ProductRoute(store)
+        ProductRoute(store),
+        CategoryRoute(store),
       ]
     },
     {

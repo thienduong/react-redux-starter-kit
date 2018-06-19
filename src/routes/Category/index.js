@@ -4,16 +4,15 @@ export default (store) => {
   const authenticate = (nextState, transition) => {
     // if router not home "/" check authenticate
     if (nextState.location.pathname !== '/') {
-      let { app } = store.getState();
-
+      let { app } = store.getState()
       if (!app || !app.acceptToken) {
-        transition('/signin');
+        transition('/signin')
       }
     }
   }
   return {
     onEnter: authenticate,
-    path : 'products',
+    path : 'categories',
     /*  Async getComponent is only invoked when route matches   */
     getComponent (nextState, cb) {
       /*  Webpack - use 'require.ensure' to create a split point
@@ -21,13 +20,14 @@ export default (store) => {
       require.ensure([], (require) => {
         /*  Webpack - use require callback to define
          dependencies for bundling   */
-        const Product = require('./containers/ProductContainer').default
-        const reducer = require('./modules/product').default/*  Add the reducer to the store on key 'product'  */
-        injectReducer(store, { key: 'product', reducer })
+        const Catgegory = require('./containers/CategoryContainer').default
+        const reducer = require('./modules/category').default/*  Add the reducer to the store on key 'category'  */
+        injectReducer(store, { key: 'category', reducer })
+        injectReducer(store, { key: 'category', reducer })
         /*  Return getComponent   */
-        cb(null, Product)
+        cb(null, Catgegory)
         /* Webpack named bundle   */
-      }, 'product')
+      }, 'category')
     }
   }
 }

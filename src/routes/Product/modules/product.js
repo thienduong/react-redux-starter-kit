@@ -16,8 +16,9 @@ export function increment (value = 1) {
         console.log(response);
         dispatch(getProductSuccess(response.data.ProductList))
       }).catch(function (error) {
-      console.log(error)
-    })
+        console.log(error)
+      }
+    )
   }
 }
 
