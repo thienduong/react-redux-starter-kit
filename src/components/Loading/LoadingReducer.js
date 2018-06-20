@@ -11,7 +11,6 @@ export const HIDE_LOADING = 'HIDE_LOADING'
 // ------------------------------------
 // Actions
 // ------------------------------------
-var timeOut
 export function showLoading () {
   return {
     type: SHOW_LOADING
@@ -23,18 +22,23 @@ export function showLoading () {
 // ------------------------------------
 export function delayShowLoading () {
   return (dispatch) => {
-    type: SHOW_LOADING
-    timeOut = setTimeout(() => {
+    setTimeout(() => {
       dispatch(delayHideLoading())
-    }, 1000)
+    }, 3000)
   }
 }
+var temp ;
 export function hideLoading () {
   return (dispatch) => {
-    timeOut = setTimeout(() => {
-      dispatch(hideLoading())
+    temp =1 ;
+    console.log(temp)
+    var timeOut = setTimeout(function () {
+      dispatch(delayHideLoading())
     }, 3000)
-    timeOut = setTimeout(() => {
+
+    setTimeout(function () {
+      console.log(temp)
+      clearTimeout(timeOut)
       dispatch(delayShowLoading())
     }, 1000)
   }
@@ -44,6 +48,7 @@ export function hideLoading () {
 export function delayHideLoading () {
   return {
     type: HIDE_LOADING
+
   }
 }
 
