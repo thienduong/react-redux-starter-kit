@@ -7,6 +7,7 @@ import ProductRoute from './Product'
 import CategoryRoute from './Category'
 import SignInRoute from './SignIn'
 
+
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -31,6 +32,7 @@ export const createRoutes = (store) => {
         CounterRoute(store),
         ProductRoute(store),
         CategoryRoute(store),
+
       ]
     },
     {
