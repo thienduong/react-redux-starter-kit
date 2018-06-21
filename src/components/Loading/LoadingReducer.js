@@ -7,7 +7,7 @@ import { signInSuccess } from '../../routes/SignIn/modules/SignInReducer'
 
 export const SHOW_LOADING = 'SHOW_LOADING'
 export const HIDE_LOADING = 'HIDE_LOADING'
-
+var temp
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -24,21 +24,19 @@ export function delayShowLoading () {
   return (dispatch) => {
     setTimeout(() => {
       dispatch(delayHideLoading())
-    }, 3000)
+    }, 7000)
   }
 }
-var temp ;
+
 export function hideLoading () {
   return (dispatch) => {
-    temp =1 ;
-    console.log(temp)
-    var timeOut = setTimeout(function () {
+    temp = setTimeout(function () {
       dispatch(delayHideLoading())
     }, 3000)
 
     setTimeout(function () {
       console.log(temp)
-      clearTimeout(timeOut)
+      clearTimeout(temp)
       dispatch(delayShowLoading())
     }, 1000)
   }
